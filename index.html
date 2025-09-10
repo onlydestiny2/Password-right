@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Sharing</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background: #222; color: #fff; }
+    #hidden, #actual { font-size: 24px; letter-spacing: 3px; }
+    input[type="password"] { font-size: 24px; letter-spacing: 3px; padding: 8px; margin-bottom: 8px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 8px; }
+    #copyBtn { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>🔒 Create a Password</h2>
+  <input type="password" id="passwordInput" placeholder="Enter your password">
+  <br>
+  <button onclick="setPassword()">Save Password</button>
+  <div id="showSection" style="display:none;">
+    <p>Your password (hidden): <span id="hidden">******</span></p>
+    <button id="copyBtn" onclick="copyPassword()">Copy Password</button>
+  </div>
+  <script>
+    let realPassword = "";
+    function setPassword() {
+      const input = document.getElementById('passwordInput').value;
+      if (!input) { alert("Enter a password!"); return; }
+      realPassword = input;
+      document.getElementById('showSection').style.display = 'block';
+      document.getElementById('passwordInput').style.display = 'none';
+    }
+    function copyPassword() {
+      navigator.clipboard.writeText(realPassword).then(() => {
+        alert("✅ Password copied!");
+      });
+    }
+  </script>
+</body>
+</html>
